@@ -1,0 +1,26 @@
+default: &default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+development:
+  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  database: groupthink_development
+  host: localhost
+  user: <%= ENV['PG_USER'] %>
+  password: <%= ENV['PG_PW'] %>
+
+test:
+  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  database: groupthink_test
+  host: localhost
+  user: <%= ENV['PG_USER'] %>
+  password: <%= ENV['PG_PW'] %>
+
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
